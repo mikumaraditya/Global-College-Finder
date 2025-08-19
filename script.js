@@ -79,7 +79,7 @@ function showColleges(result){
     }
 }
 
-let url="https://api.allorigins.win/raw?url=http://universities.hipolabs.com/search?name=";
+let url="http://universities.hipolabs.com/search?name=";
 
 async function getColleges(country){
     try{

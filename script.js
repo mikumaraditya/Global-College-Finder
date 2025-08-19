@@ -72,7 +72,7 @@ function showColleges(result){
     }
 }
 
-let url="http://universities.hipolabs.com/search?country=";
+let url="http://universities.hipolabs.com/search?name=middle&country=";
 
 async function getColleges(country){
     try{

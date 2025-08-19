@@ -10,15 +10,22 @@ searchbtn.addEventListener("click",async ()=>{
         alert("Please enter the valid country name");
     }
     else{
+        try{
+
         let result=await getColleges(country);
 
         if (result.length === 0) {
         alert("Please enter a valid country name");
         return;
-    }
+         }
         // console.log(result);
         collegeList.innerHTML="";
         showColleges(result);
+        }catch(e){
+            alert("Collage not found");
+        }
+        
+
     }
     
 });

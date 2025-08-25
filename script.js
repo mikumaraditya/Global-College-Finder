@@ -1,8 +1,6 @@
 let searchbtn=document.querySelector("#searchbtn");
 let collegeList=document.querySelector(".college-results");
 
-
-
 searchbtn.addEventListener("click",async ()=>{
     let country=document.querySelector("input").value;
     document.querySelector("input").value="";

@@ -77,7 +77,7 @@ function showColleges(result){
     }
 }
 
-let url = "https://api.allorigins.win/raw?url=http://universities.hipolabs.com/search?country=";
+let url = "https://cors-anywhere.herokuapp.com/http://universities.hipolabs.com/search?country=";
 
 async function getColleges(country){
     try{

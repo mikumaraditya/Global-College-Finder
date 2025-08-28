@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import connectDB from "./database/db.js";
 import Institute from "./models/dataModels.js"
 
@@ -8,7 +9,18 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 
+
+
 connectDB();
+
+
+app.use(express.json());
+app.use(cors({
+  origin: "https://global-college-finder.vercel.app",
+  credentials: true
+}));
+
+
 
 app.get("/colleges", async (req, res) => {
     try {

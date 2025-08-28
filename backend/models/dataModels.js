@@ -1,0 +1,33 @@
+import mongoose from "mongoose";
+
+const instituteSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  domains: {
+    type: [String],
+    required: true
+  },
+  web_pages: {
+    type: [String],
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
+  alpha_two_code: {
+    type: String,
+    required: true,
+    maxlength: 2
+  },
+  state_province: {
+    type: String,
+    default: null
+  }
+});
+
+const Institute = mongoose.model("universities", instituteSchema);
+
+export default Institute;

@@ -94,3 +94,13 @@
     grid-template-columns: 1fr; /* 1 per row */
   }
 }
+@media (max-width: 576px) { /* small devices */
+  .toast {
+    bottom: 15px;
+    right: 50%;
+    transform: translateX(50%) translateY(-20px); /* center horizontally */
+    padding: 10px 15px;
+    font-size: 14px;
+    max-width: 90%; /* almost full width */
+  }
+}

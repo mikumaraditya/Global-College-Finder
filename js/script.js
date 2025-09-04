@@ -127,7 +127,7 @@ form.addEventListener("submit", async (e) => {
 
   try {
     loaderOverlay.style.display = "flex";
-    const response = await axios.post("https://global-college-api.onrender.com//send-email", emailData);
+    const response = await axios.post("https://global-college-api.onrender.com/send-email", emailData);
    
     loaderOverlay.style.display = "none";
     showToast(response.data.message, "success");

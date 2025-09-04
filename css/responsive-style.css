@@ -94,3 +94,17 @@
     grid-template-columns: 1fr; /* 1 per row */
   }
 }
+@media (max-width: 800px) { /* small devices */
+  .toast {
+    top: 15px;       /* distance from top */
+    right: 15px;     /* distance from right edge */
+    bottom: auto;    /* reset bottom */
+    left: auto;      /* reset left */
+    padding: 10px 18px;
+    font-size: 14px;
+    max-width: 90%;  /* ensures it fits on small screens */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    transform: translateY(0); /* no horizontal transform */
+  }
+}

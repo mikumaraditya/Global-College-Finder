@@ -288,7 +288,7 @@ body.overlay-open {
   justify-content: center;
   align-items: flex-start;
   z-index: 3000;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding: 40px 0;
 }
 

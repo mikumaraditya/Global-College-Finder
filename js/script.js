@@ -138,34 +138,7 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loaderOverlay = document.getElementById("loader-overlay");
-  const images = document.querySelectorAll("img");
-  let loadedCount = 0;
 
-  if (images.length === 0) {
-    loaderOverlay.style.display = "none";
-  }
-
-  images.forEach(img => {
-    // If image is cached, consider it loaded
-    if (img.complete) {
-      loadedCount++;
-    } else {
-      img.addEventListener("load", () => {
-        loadedCount++;
-        if (loadedCount === images.length) loaderOverlay.style.display = "none";
-      });
-      img.addEventListener("error", () => {
-        loadedCount++;
-        if (loadedCount === images.length) loaderOverlay.style.display = "none";
-      });
-    }
-  });
-
-  // If all images are already loaded
-  if (loadedCount === images.length) loaderOverlay.style.display = "none";
-});
 
 
 

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CollegeAtlas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./css/responsive-style.css">
+  <link rel="icon" href="./images/icon2.png" />
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container ">
+        <div class="logo">
+          <img src="./images/icon2.png" alt="CollegeAtlas-logo">
+          <a class="navbar-brand" href="index.html">CollegeAtlas</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#colleges">Colleges</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutus">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <button class="login-btn">login</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="tag-line">
+      <h1><strong>Find colleges and plan your academic future with us!</strong></h1>
+      <p>Start your college search on the world’s trusted platform. Explore top universities globally and find your
+        perfect academic match.</p>
+    </div>
+    <div class="search-div">
+      <input type="text" id="search_box" placeholder="Location">
+      <button id="searchbtn">Search</button>
+    </div>
+    <div id="loader" style="display:none; text-align:center; margin:20px;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div id="loader-overlay">
+      <div class="spinner"></div>
+    </div>
+    <div id="college-overlay">
+      <div class="overlay-content">
+        <button id="close-overlay">✖</button>
+        <div class="container">
+          <div class="row college-results"></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="colleges">
+    <div class="container my-5">
+
+      <h2>Top Colleges of Asia</h2>
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/iit_bombay.jpg"
+              alt="IIT-Bombay">
+            <div class="card-content">
+              <h4>Indian Institute of Technology (IIT) Bombay</h4>
+              <p>Location: India <br> QS World University Ranking: 118</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://acad.iitb.ac.in/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/tokyo.jpg"
+              alt="University of Tokyo">
+            <div class="card-content">
+              <h4>University of Tokyo</h4>
+              <br>
+              <p>Location: Japan <br> QS World University Ranking: 28</p>
+              <button class="btn btn-outline-primary"
+                onclick="window.open('https://www.u-tokyo.ac.jp/en/','_blank')">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/nus.jpg"
+              alt="National University of Singapore (NUS)">
+            <div class="card-content">
+              <h4>National University of Singapore (NUS)</h4>
+              <p>Location: Singapore <br> QS World University Ranking: 8</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.nus.edu.sg/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <h2>Top Colleges of Europe</h2>
+
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/oxford.jpg"
+              alt="University of Oxford">
+            <div class="card-content">
+              <h4>University of Oxford</h4>
+              <br>
+              <p>Location: United Kingdom <br>
+                QS World University Ranking: 4</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.ox.ac.uk/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/Cambridge.jpg">
+            <div class="card-content">
+              <h4>University of Cambridge</h4><br>
+              <p>Location: United Kingdom <br> QS World University Ranking: 6</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.cam.ac.uk/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/zurich.jpg"
+              alt="Swiss Federal Institute of Technology">
+            <div class="card-content">
+              <h4>ETH Zurich (Swiss Federal Institute of Technology)</h4>
+              <p>Location: Switzerland <br>QS World University Ranking: 7</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://ethz.ch/en.html','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>Top Colleges of North America</h2>
+
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/mit.jpg"
+              alt="Massachusetts Institute of Technology">
+            <div class="card-content">
+              <h4>MIT (Massachusetts Institute of Technology)</h4>
+              <p>Location: United States of America <br>QS World University Ranking: 1</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.mit.edu/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/Harvard.jpg"
+              alt="Harvard University">
+            <div class="card-content">
+              <h4>Harvard University</h4>
+              <br>
+              <p>Location: United States of America <br>
+                QS World University Ranking: 5</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.harvard.edu/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/standford.jpg" alt="Stanford University">
+            <div class="card-content">
+              <h4>Stanford University</h4>
+              <br>
+              <p>Location: United States of America <br> QS World University Ranking: 3</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.stanford.edu/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>Top Colleges of South America</h2>
+
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/chile.jpg"
+              alt="University of Chile">
+            <div class="card-content ">
+              <h4>University of Chile</h4>
+              <br>
+              <p>Location: Chile <br>QS World University Ranking: 461</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://uchile.cl/english','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/sao_paulo.jpg"
+              alt="Universidade de São Paulo (USP)">
+            <div class="card-content">
+              <h4>Universidade de São Paulo</h4><br>
+              <p>Location: Brazil <br>QS World University Ranking: 85</p>
+              <button class="btn btn-outline-primary"
+                onclick="window.open('https://www5.usp.br/english/institutional/','_blank')">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/aires.webp"
+              alt="Universidad de Buenos Aires (UBA)">
+            <div class="card-content">
+              <h4>Universidad de Buenos Aires</h4> <br>
+              <p>Location: Argentina <br>QS World University Ranking: 84</p>
+              <button class="btn btn-outline-primary"
+                onclick="window.open('https://study.buenosaires.gob.ar/en/institucion/view/2','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>Top Colleges of Australia</h2>
+
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/Melbourne.webp"
+              alt="University of Melbourne">
+            <div class="card-content">
+              <h4>University of Melbourne</h4><br>
+              <p>Location: Melbourne <br>QS World University Ranking: 13</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.unimelb.edu.au/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/sydney.jpg"
+              alt="University of Sydney">
+            <div class="card-content">
+              <h4>University of Sydney</h4><br>
+              <p>Location: Sydney <br>QS World University Ranking: 18</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.sydney.edu.au/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img
+              src="./images/new-south.jpg"
+              alt="University of New South Wales">
+            <div class="card-content">
+              <h4>University of New South Wales</h4><br>
+              <p>Location: Sydney <br>QS World University Ranking: 19</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.unsw.edu.au/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h2>Top Colleges of Africa</h2>
+
+      <div class="row my-5">
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/CapeTown.jpg"
+              alt="University of Cape Town">
+            <div class="card-content">
+              <h4>University of Cape Town</h4><br>
+              <p>Location: South Africa <br>QS World University Ranking: 171</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://www.uct.ac.za/','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/stellenbosch.jpg"
+              alt="Stellenbosch University">
+            <div class="card-content">
+              <h4>Stellenbosch University</h4><br>
+              <p>Location: South Africa <br>QS World University Ranking: 296</p>
+              <button class="btn btn-outline-primary"
+                onclick="window.open('https://www.sun.ac.za/english','_blank')">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card2 text-center p-4">
+            <img src="./images/cairo.jpg" alt="Cairo University">
+            <div class="card-content">
+              <h4>Cairo University</h4><br>
+              <p>Location: Egypt <br>QS World University Ranking: 350</p>
+              <button class="btn btn-outline-primary" onclick="window.open('https://cu.edu.eg/Home','_blank')">View
+                Details</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="aboutus">
+    <div class="container">
+
+      <h2>About Us</h2>
+
+      <div>
+        <h5>Welcome to College Finder, your trusted platform for exploring top colleges and universities around the
+          world.
+
+          We understand that choosing the right college is one of the most important decisions in a student’s life.
+          That’s why we created College Finder — to make your search simpler, faster, and smarter.</h5>
+      </div>
+
+      <div class="aboutus-img-section">
+
+        <div>
+          <div class="my-4">
+            <h4><i class="fa-solid fa-graduation-cap"></i> What we do</h4>
+            <ul>
+              <li>Help students discover colleges by country, continent, or course.</li>
+              <li>Provide detailed information about rankings, courses, fees, and facilities.</li>
+              <li>Offer tools to compare colleges side by side.</li>
+              <li>Guide students with verified links for applications and admissions.</li>
+            </ul>
+          </div>
+
+          <div class="my-4 aboutus-img">
+            <div>
+              <h4><i class="fa-solid fa-earth-americas"></i> Our Mission</h4>
+              <p>At College Finder, our mission is to empower students by providing accurate and transparent <br>
+                information about colleges and universities worldwide. We strive to simplify the process of exploring,
+                <br> comparing, and choosing institutions by offering clear insights into courses, rankings, fees, and
+                <br> admissions. Our goal is to connect students with the right opportunities, helping them make <br>
+                informed decisions that shape their academic journey and future career with confidence.
+              </p>
+            </div>
+          </div>
+
+          <div class="my-4">
+            <h4><i class="fa-solid fa-handshake"></i> Why Choose Us?</h4>
+            <ul>
+              <li>Wide Database of global colleges.</li>
+              <li>User-friendly interface for quick searches.</li>
+              <li>Updated information for reliable decisions.</li>
+              <li>Personalized search to match your career goals.</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        <img src="images/aboutus-img.png" alt="aboutus-img" id="aboutus-img">
+
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="head">
+        <div class="contact-header">
+          <span class="btn-write">WRITE TO US</span>
+          <h1>Get In Touch</h1>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="contact-form">
+          <h2 class="form-title">Let's Talk!</h2>
+          <p class="form-subtitle">Get in touch with us using the enquiry form or contact details below.</p>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-input" placeholder="firstName" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-input" placeholder="lastName" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-input" placeholder="abcd@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" class="form-textarea" placeholder="Type something..." required></textarea>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="communication" name="communication">
+              <label for="communication">I agree to receive updates about top colleges, courses, and admission
+                alerts.</label>
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="data" name="data" >
+              <label for="data">I give my consent to College Finder to securely store my details for providing
+                personalized recommendations.</label>
+            </div>
+
+            <div class="privacy-policy">
+              College Finder is committed to protecting and respecting your privacy in accordance with our
+              <a href="privacy-policy.html" target="_blank">Privacy Policy</a>. From time to time, we may contact you
+              with updates about colleges, courses, scholarships, and other services that may be of interest to you.
+            </div>
+
+            <button type="submit" class="btn-submit" onclick="validateForm()">Start for Free</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="quick-contact">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <div class="contact-title">Email</div>
+            <div class="contact-details">CollegeAtlas.info@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="contact-title">Phone Number</div>
+            <div class="contact-details">India +91 (735) 6376611<br>US +1 (669) 4993665</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="contact-title">Headquarter</div>
+            <div class="contact-details">Manyata Tech Park, Nagawara, Bangalore, Karnataka, India</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="follow-us">
+        <h3 class="follow-title">Follow us</h3>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#" class="social-icon"><i class="fa-brands fa-medium"></i></a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="copyright">
+      © Copyright 2025. All Rights Reserved by CollegeAtlas.edu
+    </div>
+    </div>
+    </footer>
+  </section>
+
+
+  <div id="toast"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

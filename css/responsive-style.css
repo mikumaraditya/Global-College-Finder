@@ -94,13 +94,15 @@
     grid-template-columns: 1fr; /* 1 per row */
   }
 }
-@media (max-width: 576px) { /* small devices */
+@media (max-width: 800px) { /* small devices */
   .toast {
-    bottom: 15px;
-    right: 50%;
-    transform: translateX(50%) translateY(-20px); /* center horizontally */
-    padding: 10px 15px;
-    font-size: 14px;
-    max-width: 90%; /* almost full width */
+    bottom: 20px; /* space from bottom */
+    left: 50%; /* center horizontally */
+    transform: translateX(-50%) translateY(0); /* center properly */
+    padding: 12px 20px;
+    font-size: 15px;
+    max-width: 95%; /* almost full width */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
   }
 }

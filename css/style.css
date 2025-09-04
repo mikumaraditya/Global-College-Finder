@@ -292,6 +292,11 @@ body.overlay-open {
   padding: 40px 0;
 }
 
+#college-overlay .college-results {
+  display: grid;
+  gap: 20px; /* space between cards */
+  grid-template-columns: repeat(3, 1fr); /* 3 per row by default */
+}
 #college-overlay .overlay-content {
   background: #ffffff;
   width: 90%;

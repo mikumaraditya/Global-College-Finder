@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buttonText.style.display = 'none';
   
       try {
-        const response = await axios.post("http://localhost:5000/signup", {
+        const response = await axios.post("https://global-college-api.onrender.com/signup", {
           email,
           password
         });

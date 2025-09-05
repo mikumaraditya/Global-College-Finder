@@ -52,6 +52,7 @@ body {
 .login-btn {
   width: 68px;
   height: 40px;
+  display: none;
   border: 1px solid gray;
   border-radius: 0.5rem;
   background-color: #dc3545;;

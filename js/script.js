@@ -142,5 +142,19 @@ document.querySelector(".login-btn").addEventListener("click", () => {
   window.location.href = "../signin-page/signin.html";
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".nav-link, .login-btn");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 991) { // Bootstrap lg breakpoint
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        bsCollapse.hide(); // collapse the menu
+      }
+    });
+  });
+});
+
 
 

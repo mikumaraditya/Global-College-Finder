@@ -2,7 +2,9 @@ import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import userModel from "../models/userModel.js";
-import reqBody from "../validators/validate.js"
+import reqBody from "../validators/validate.js";
+import cookie from 'cookie';
+
 
 const router = express.Router();
 
@@ -73,12 +75,12 @@ router.post("/signup", async (req, res) => {
         const token = jwt.sign( { id: user._id}, process.env.JWT_SECRET,{ expiresIn: "1d" });
         
         
-        res.cookie("token", token, {
+        res.setHeader('Set-Cookie', cookie.serialize('token', token, {
           httpOnly: true,
-          secure: true,       
-          sameSite: "none",
-          maxAge: 24 * 60 * 60 * 1000 // 1 day
-        });
+          secure: true,      
+          sameSite: 'none', 
+          maxAge: 24 * 60 * 60
+        }));
         
         res.status(200).json({
           message: "User signed in successfully",

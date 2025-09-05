@@ -54,7 +54,7 @@ body {
   height: 40px;
   border: 1px solid gray;
   border-radius: 0.5rem;
-  background-color: #267dfe;
+  background-color: #dc3545;;
   color: white;
   cursor: pointer;
   margin-left: 2rem;
@@ -107,7 +107,7 @@ body {
   margin-left: 2.5rem;
   border: 1px solid gray;
   border-radius: 0.5rem;
-  background-color: #267dfe;
+  background-color: #dc3545;;
   color: white;
   cursor: pointer;
   border: none;

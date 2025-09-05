@@ -138,7 +138,9 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-
+document.querySelector(".login-btn").addEventListener("click", () => {
+  window.location.href = "../signin-page/signin.html";
+});
 
 
 

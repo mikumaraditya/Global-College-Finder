@@ -89,20 +89,20 @@
   }
 }
 
-@media (max-width: 576px) { /* extra small screens */
+@media (max-width: 576px) { 
   #college-overlay .college-results {
     grid-template-columns: 1fr; /* 1 per row */
   }
 }
-@media (max-width: 800px) { /* small devices */
+@media (max-width: 1000px) { /* small devices */
   .toast {
-    top: 15px;       /* distance from top */
-    right: 15px;     /* distance from right edge */
-    bottom: auto;    /* reset bottom */
-    left: auto;      /* reset left */
+    top: 15px;      
+    right: 15px;     
+    bottom: auto;    
+    left: auto;     
     padding: 10px 18px;
     font-size: 14px;
-    max-width: 90%;  /* ensures it fits on small screens */
+    max-width: 90%;  
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     border-radius: 8px;
     transform: translateY(0); /* no horizontal transform */

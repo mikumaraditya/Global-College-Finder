@@ -13,11 +13,10 @@
     }
 }
 
-@media (max-width:991) {
-  .login-btn{
-    margin: 8px 0 0 25px;
-  }
-  
+@media (max-width:990px) {
+    .login-btn{
+      margin: 8px 0 0 27px;
+    }
 }
 @media (max-width:820px) and (min-width:780px) {
   #aboutus-img{

@@ -1,4 +1,3 @@
-
 const loginForm = document.getElementById('loginForm');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
@@ -59,16 +58,15 @@ loginForm.addEventListener('submit', async (e) => {
 
     try {
         const response = await axios.post(
-            'http://localhost:8000/signin',
+            'http://localhost:5000/signin',
             { email, password },
             { withCredentials: true }   
         );
         
         if (response.data.success) {  
             showToast('Login successful!', 'success');
-            
             setTimeout(() => {  
-                window.location.href = "/index.html";
+                window.location.href = "../index.html";
             }, 1000);
         } else {
             showToast('Login failed!', 'error');

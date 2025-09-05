@@ -66,6 +66,23 @@ body {
   color: #ffdd57;
 }
 
+.logout-btn {
+  width: 68px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  background-color: #dc3545;;
+  color: white;
+  cursor: pointer;
+  margin-left: 2rem;
+  font-weight: 600;
+  border: none;
+}
+
+.logout-btn:hover {
+  color: #ffdd57;
+}
+
 #home {
   background: url("../images/bg-img-collegefinder.png");
   background-size: cover;

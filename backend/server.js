@@ -1,16 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import nodemailer from "nodemailer";
+import cookieParser from "cookie-parser";
 import connectDB from "./database/db.js";
-import dataRouter from "./router/dataRouter.js"
+import dataRouter from "./router/dataRouter.js";
+import contactRoute from "./router/contactRoute.js";
+import userRoute from "./router/userRoute.js";
+import authMiddleware from "./auth/auth.js";
+
 
 dotenv.config({path:"./config.env"});
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT ;
+app.use(cookieParser());
 
 
 connectDB();
+
+
 
 app.use(express.json());
 app.use(cors({
@@ -18,44 +25,16 @@ app.use(cors({
   credentials: true
 }));
 
-app.use("/colleges",dataRouter)
-  
-  app.post("/send-email", async (req, res) => {
-    const { firstName, lastName, email, message, communication, dataConsent } = req.body;
-  
-  
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,        
-        pass: process.env.PASSWORD          
-      }
+
+app.use(dataRouter);
+app.use(contactRoute);
+app.use(userRoute);
+
+app.get("/auth",authMiddleware,(req,res)=>{
+    res.status(200).json({
+        success: true
     });
-  
-   
-    const mailOptions = {
-      from: process.env.EMAIL,        
-      to: "collegeatlas.info@gmail.com",           
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
-      text: `
-  First Name: ${firstName}
-  Last Name: ${lastName}
-  Email: ${email}
-  Message: ${message}
-  Agreed to Communication: ${communication}
-  Agreed to Data Storage: ${dataConsent}
-      `
-    };
-  
-    try {
-      await transporter.sendMail(mailOptions);
-      res.json({ success: true, message: "Email sent successfully!" });
-    } catch (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ success: false, message: "Failed to send email" });
-    }
-  });
-  
+});
 
 app.listen(PORT,()=>{
     console.log(`Server is running at ${PORT} `);

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buttonText.style.display = 'none';
   
       try {
-        const response = await axios.post("http://localhost:8000/signup", {
+        const response = await axios.post("http://localhost:5000/signup", {
           email,
           password
         });
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.status === 200 || response.status === 201) {
           showToast(response.data.message || "Signup successful!", "success");
           setTimeout(() => {
-            window.location.href = '/signin';
+            window.location.href = '../signin-page/signin.html';
           }, 1000);
         }
   

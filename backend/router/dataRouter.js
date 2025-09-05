@@ -1,5 +1,6 @@
 import express from "express";
-import Institute from "./models/dataModels.js"
+import Institute from "../models/dataModels.js";
+import authMiddleware from "../auth/auth.js";
 
 const router = express.Router();
 

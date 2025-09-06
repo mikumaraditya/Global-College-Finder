@@ -365,8 +365,8 @@ body.overlay-open {
 /* Close Button */
 #close-overlay {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 0px;
+  right: 0px;
   background: #ff4c4c;
   border: none;
   color: white;

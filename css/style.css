@@ -340,7 +340,7 @@ body.overlay-open {
 
 /* WebKit (Chrome, Edge, Safari) */
 #college-overlay .overlay-content::-webkit-scrollbar {
-  width: 8px;
+  width: 21px;
 }
 #college-overlay .overlay-content::-webkit-scrollbar-track {
   background: transparent;

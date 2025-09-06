@@ -121,7 +121,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 576px ) and (max-height: 1000px){
   #college-overlay .overlay-content::-webkit-scrollbar {
     width: 32px; /* wider for visibility */
   }

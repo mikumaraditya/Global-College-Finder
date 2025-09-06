@@ -332,9 +332,35 @@ body.overlay-open {
   overflow-y: auto;
 }
 
-#college-overlay .overlay-content::-webkit-scrollbar {
-  display: none;
+/* keep scrolling enabled on the content */
+#college-overlay .overlay-content {
+  overflow-y: auto;
+  scrollbar-gutter: stable; /* avoid layout shift when scrollbar appears */
 }
+
+/* WebKit (Chrome, Edge, Safari) */
+#college-overlay .overlay-content::-webkit-scrollbar {
+  width: 8px;
+}
+#college-overlay .overlay-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+#college-overlay .overlay-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.35);
+  border-radius: 8px;
+  border: 2px solid transparent; /* creates padding effect */
+  background-clip: padding-box;
+}
+#college-overlay .overlay-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.55);
+}
+
+/* Firefox */
+#college-overlay .overlay-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.35) transparent;
+}
+
 
 /* Close Button */
 #close-overlay {

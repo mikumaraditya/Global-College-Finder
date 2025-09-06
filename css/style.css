@@ -340,7 +340,7 @@ body.overlay-open {
 #close-overlay {
   position: absolute;
   top: 38px;
-  right: 100px;
+  right: 20px;
   background: #ff4c4c;
   border: none;
   color: white;

@@ -324,9 +324,9 @@ body.overlay-open {
   padding: 20px;
   border-radius: 12px;
 
-  #college-overlay .overlay-content::-webkit-scrollbar {
+/*   #college-overlay .overlay-content::-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
   overflow-y: auto;

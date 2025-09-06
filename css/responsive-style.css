@@ -120,3 +120,17 @@
     transform: translateY(0); /* no horizontal transform */
   }
 }
+
+@media (max-width: 576px) {
+  #college-overlay .overlay-content::-webkit-scrollbar {
+    width: 32px; /* wider for visibility */
+  }
+  #college-overlay .overlay-content::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.55); /* darker */
+    border-radius: 10px;
+  }
+  #college-overlay .overlay-content {
+    scrollbar-color: rgba(0,0,0,0.55) transparent; /* Firefox */
+    scrollbar-width: thick;
+  }
+}

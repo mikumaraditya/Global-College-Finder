@@ -80,6 +80,7 @@ router.post("/signup", async (req, res) => {
           sameSite: "none",
           maxAge: 24 * 60 * 60 * 1000 // 1 day
         });
+
         
         res.status(200).json({
           message: "User signed in successfully",
@@ -97,7 +98,7 @@ router.post("/signup", async (req, res) => {
     res.clearCookie("token", {
       httpOnly: true,
       secure: true,
-      sameSite: "lax"
+      sameSite: "none"
     });
     res.json({ success: true, message: "Logged out successfully" });
   });

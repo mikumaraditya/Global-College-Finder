@@ -63,7 +63,7 @@ router.post("/signup", async (req, res) => {
        
         
       if (!user) {
-        return res.status(400).json({ error: "Invalid email" });
+        return res.status(400).json({ error: "User not found! Please First Signup" });
       }
       const isMatch = await bcrypt.compare(password, user.password);
      

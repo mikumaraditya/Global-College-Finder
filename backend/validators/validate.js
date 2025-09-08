@@ -1,8 +1,7 @@
 import{ z } from 'zod';
 
 const reqBody = z.object({
-    email: z.string()
-      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: "Invalid email format" })
+    email: z.email({ message: "Invalid email format" })
       .min(3, { message: "Email must be at least 3 characters" })
       .max(50, { message: "Email must be less than 50 characters" }),
 

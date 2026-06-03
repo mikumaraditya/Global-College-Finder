@@ -27,7 +27,7 @@ graph TD
 ```
 
 ### 1. Architectural Patterns
-*   **Local Database Search**: Queries university records stored directly within the MongoDB Atlas cluster. When a search yields no exact matches, the system dynamically generates spelling suggestions based on Levenshtein-distance string comparisons against the list of unique countries in the database.
+*   **Server-Side Pagination & Search**: Queries university records in the MongoDB Atlas cluster dynamically using pagination parameters (page, limit). Paging queries utilize fast count operations, skip offsets, and limit checks. When a search yields no exact matches, spelling suggestions are generated based on Levenshtein-distance string comparisons.
 *   **Dynamic API Resolution**: The client dynamically checks the hosting context. If hosted on a cloud domain (e.g., Vercel), it makes relative HTTP requests to Vercel's serverless gateway. During local development, it falls back to querying the backend port (default: `http://localhost:3000`).
 *   **Zod Data Validation & Bcrypt Hashing**: Decoupled validation schemas ensure incoming payloads are vetted before reaching database models. Passwords are salted and hashed (10 rounds) using Bcrypt.
 
@@ -151,18 +151,20 @@ All paths except registration/auth endpoints are protected by `authMiddleware` v
 | **POST** | `/signin` | Public | `{ email, password }` | `200` Success + HTTP-Only Cookie | Verifies user, signs JWT token, and writes Cookie. |
 | **POST** | `/logout` | Public | None | `200` Success | Clears HTTP-only JWT verification token cookie. |
 | **GET** | `/auth` | Protected | None | `200` `{ success: true }` | Verifies active session JWT presence. |
-| **GET** | `/colleges` | Protected | `?country=India` | `200` `[University Array]` | Main search query. Queries the MongoDB database directly. |
+| **GET** | `/colleges` | Protected | `?country=India&page=1&limit=20` | `200` Paginated JSON Object | Main search query. Returns a paginated JSON response matching optional country filters. |
 | **POST** | `/send-email` | Public | `{ firstName, lastName, email, message, communication, dataConsent }` | `200` Success | Dispatches client inquiries to head office via Nodemailer SMTP. |
 
 ---
 
 ## 🧠 Advanced Algorithms & Logic
 
-### 1. Direct MongoDB Query
+### 1. Paginated MongoDB Search
 The `/colleges` endpoint processes searches by:
-1. Performing a case-insensitive regular expression match on the `country` field of the local MongoDB collection.
-2. Returning matching records if they are found.
-3. If no records are found, searching distinct country values in the database for string matches or spelling suggestions.
+1. Parsing the optional `country` search query, `page` offset (default: 1), and page `limit` (default: 20).
+2. Counting matching records efficiently via `countDocuments()` to determine total pages and offsets.
+3. Running a query with Mongoose `skip((page - 1) * limit)` and `limit(limit)` to fetch only the requested slice.
+4. Extracting unique states for the matched country on page 1 to load the client dropdown filter dynamically.
+5. If no records match, running the Levenshtein suggestion system.
 
 ### 2. Levenshtein-Distance Spelling Suggestions
 If a user searches for a country that doesn't exist in the database or the external directory, the server tries to find a suggestion using string-matching algorithms:

@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/(signup|signin|logout|colleges|auth|contact)",
+      "src": "/(signup|signin|logout|colleges|auth|contact|send-email)",
       "dest": "backend/server.js"
     },
     {

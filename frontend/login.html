@@ -217,7 +217,9 @@
 <script>
     // Redirect to dashboard if already logged in
     (async () => {
-        const API_BASE = (window.location.origin.includes("localhost:3000") || window.location.origin.includes("127.0.0.1:3000"))
+        const API_BASE = (!window.location.origin.includes("localhost") && !window.location.origin.includes("127.0.0.1"))
+            || window.location.origin.includes("localhost:3000")
+            || window.location.origin.includes("127.0.0.1:3000")
             ? ""
             : "http://localhost:3000";
         try {
@@ -238,7 +240,9 @@
         const emailInput = form.querySelector('input[type="email"]');
         const passwordInput = form.querySelector('input[type="password"]');
         
-        const API_BASE = (window.location.origin.includes("localhost:3000") || window.location.origin.includes("127.0.0.1:3000"))
+        const API_BASE = (!window.location.origin.includes("localhost") && !window.location.origin.includes("127.0.0.1"))
+            || window.location.origin.includes("localhost:3000")
+            || window.location.origin.includes("127.0.0.1:3000")
             ? ""
             : "http://localhost:3000";
 

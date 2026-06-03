@@ -19,8 +19,10 @@ const drawerCollegeLinks = document.querySelector("#drawer-college-links");
 const drawerCollegeDomains = document.querySelector("#drawer-college-domains");
 const drawerEnquiryForm = document.querySelector("#drawer-enquiry-form");
 
-// Base API URL config: use relative URLs if served from backend, fallback to localhost:3000
-const API_BASE = (window.location.origin.includes("localhost:3000") || window.location.origin.includes("127.0.0.1:3000"))
+// Base API URL config: use relative URLs if served from production or matching backend port, fallback to localhost:3000
+const API_BASE = (!window.location.origin.includes("localhost") && !window.location.origin.includes("127.0.0.1"))
+  || window.location.origin.includes("localhost:3000")
+  || window.location.origin.includes("127.0.0.1:3000")
   ? ""
   : "http://localhost:3000";
 

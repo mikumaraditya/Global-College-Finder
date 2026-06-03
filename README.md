@@ -42,7 +42,7 @@ Global College Finder/
 ├── backend/                  # Express REST API Server
 │   ├── auth/                 # Authentication middleware
 │   │   └── auth.js           # JWT verification cookie parser middleware
-│   ├── database/             # Mongoose connection & imports
+│   ├── database/             # Mongoose connection & database management
 │   │   ├── db.js             # DB Connection (Primary Atlas / Fallback Local MongoDB)
 │   │   └── importColleges.js # Seed tool parsing JSON arrays into Mongoose
 │   ├── models/               # Mongoose DB schemas
@@ -50,7 +50,7 @@ Global College Finder/
 │   │   └── userModel.js      # User database schema
 │   ├── router/               # Express routing tables
 │   │   ├── contactRoute.js   # Contact form submission router
-│   │   ├── dataRouter.js     # College query, cache management & Levenshtein router
+│   │   ├── dataRouter.js     # College query & Levenshtein router
 │   │   └── userRoute.js      # Sign-up, sign-in, and log-out router
 │   ├── validators/           # Zod schema definitions
 │   │   └── validate.js       # Email structure & password complexity validators
@@ -59,23 +59,11 @@ Global College Finder/
 │   └── package.json          # Node dependencies & project scripts
 │
 ├── frontend/                 # Client UI (Vercel static folder)
-│   ├── images/               # Illustration assets
+│   ├── images/               # Illustration assets (aboutus-img, signup-character)
 │   ├── index.html            # Primary Dashboard (Tailwind + Particles + Modals)
 │   ├── login.html            # Premium glassmorphic sign-in page
 │   ├── signup.html           # Premium glassmorphic sign-up page
 │   └── script.js             # Client controller (auth validation, query filters, toasts)
-│
-├── css/                      # [Legacy] Native styling stylesheets
-│   ├── style.css
-│   └── responsive-style.css
-├── js/                       # [Legacy] Native client scripts
-│   └── script.js
-├── signin-page/              # [Legacy] Sign-in HTML/CSS files
-│   ├── signin.html
-│   └── login.css
-├── signup-page/              # [Legacy] Sign-up HTML/CSS files
-│   ├── signup.html
-│   └── signup.css
 │
 ├── vercel.json               # Serverless deployment configuration
 └── .gitignore                # Git ignore configuration

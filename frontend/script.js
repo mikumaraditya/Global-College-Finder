@@ -19,6 +19,12 @@ const drawerCollegeLinks = document.querySelector("#drawer-college-links");
 const drawerCollegeDomains = document.querySelector("#drawer-college-domains");
 const drawerEnquiryForm = document.querySelector("#drawer-enquiry-form");
 
+// Pagination DOM Elements
+const prevPageBtn = document.querySelector("#prev-page-btn");
+const nextPageBtn = document.querySelector("#next-page-btn");
+const pageIndicator = document.querySelector("#page-indicator");
+const paginationText = document.querySelector("#pagination-text");
+
 // Base API URL config: use relative URLs if served from production or matching backend port, fallback to localhost:3000
 const API_BASE = (!window.location.origin.includes("localhost") && !window.location.origin.includes("127.0.0.1"))
   || window.location.origin.includes("localhost:3000")
@@ -30,6 +36,10 @@ const url = `${API_BASE}/colleges?country=`;
 
 // Global State
 let loadedColleges = [];
+let currentPage = 1;
+let totalPages = 1;
+let currentCountryQuery = "";
+const itemsPerPage = 20;
 
 // SEARCH EVENT LISTENERS
 searchbtn.addEventListener("click", searchColleges);
@@ -58,6 +68,25 @@ if (stateFilter) {
   stateFilter.addEventListener("change", filterColleges);
 }
 
+// Pagination listeners
+if (prevPageBtn) {
+  prevPageBtn.addEventListener("click", async () => {
+    if (currentPage > 1) {
+      currentPage--;
+      await fetchAndRenderColleges();
+    }
+  });
+}
+
+if (nextPageBtn) {
+  nextPageBtn.addEventListener("click", async () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      await fetchAndRenderColleges();
+    }
+  });
+}
+
 // SEARCH LOGIC
 async function searchColleges() {
   const country = searchBox.value.trim();
@@ -68,44 +97,74 @@ async function searchColleges() {
     return;
   }
 
-  loaderOverlay.style.display = "flex";
-  collegeList.innerHTML = "";
-
-  const colleges = await getColleges(country);
-
-  loaderOverlay.style.display = "none";
-
-  if (!colleges) {
-    return; // Error already toasted inside getColleges
-  }
-
-  if (colleges.length === 0) {
-    showToast("No colleges found! Enter a valid country name", "error");
-    return;
-  }
-
-  // Cache results in memory
-  loadedColleges = colleges;
-
-  // Build state/province filters
-  populateStateDropdown(colleges);
+  currentPage = 1;
+  currentCountryQuery = country;
 
   // Clear inputs
   if (modalSearchBox) modalSearchBox.value = "";
   if (stateFilter) stateFilter.value = "";
   if (detailDrawer) detailDrawer.classList.add("hidden");
 
-  // Run initial display
-  filterColleges();
-  
+  await fetchAndRenderColleges();
   showOverlay();
-  showToast("Colleges loaded successfully!", "success");
+}
+
+// FETCH PAGINATED COLLEGE LIST AND RENDER
+async function fetchAndRenderColleges() {
+  if (loaderOverlay) loaderOverlay.style.display = "flex";
+  collegeList.innerHTML = "";
+
+  const response = await getColleges(currentCountryQuery, currentPage);
+
+  if (loaderOverlay) loaderOverlay.style.display = "none";
+
+  if (!response) {
+    return; // Error handled inside getColleges
+  }
+
+  const { page, limit, totalRecords, totalPages: totalP, states, data } = response;
+
+  totalPages = totalP || 1;
+  loadedColleges = data || [];
+
+  // Populate dropdown (only on page 1 of a new search)
+  if (states && currentPage === 1) {
+    populateStateDropdown(states);
+  }
+
+  // Render current list
+  filterColleges();
+
+  // Update controls UI
+  updatePaginationUI(page, limit, totalRecords);
+}
+
+// UPDATE PAGINATION CONTROLS
+function updatePaginationUI(page, limit, totalRecords) {
+  if (!paginationText || !pageIndicator || !prevPageBtn || !nextPageBtn) return;
+
+  if (totalRecords === 0) {
+    paginationText.innerText = "Showing 0–0 of 0 universities";
+    pageIndicator.innerText = "Page 1 of 1";
+    prevPageBtn.disabled = true;
+    nextPageBtn.disabled = true;
+    return;
+  }
+
+  const startIdx = (page - 1) * limit + 1;
+  const endIdx = Math.min(page * limit, totalRecords);
+
+  paginationText.innerText = `Showing ${startIdx}–${endIdx} of ${totalRecords} universities`;
+  pageIndicator.innerText = `Page ${page} of ${totalPages}`;
+
+  prevPageBtn.disabled = (page === 1);
+  nextPageBtn.disabled = (page === totalPages);
 }
 
 // FETCH API DATA
-async function getColleges(country) {
+async function getColleges(country, page = 1) {
   try {
-    const res = await axios.get(url + encodeURIComponent(country), {
+    const res = await axios.get(`${url}${encodeURIComponent(country)}&page=${page}&limit=${itemsPerPage}`, {
       withCredentials: true
     });
     return res.data;
@@ -130,15 +189,8 @@ async function getColleges(country) {
 }
 
 // POPULATE STATE DROPDOWN
-function populateStateDropdown(colleges) {
+function populateStateDropdown(states) {
   if (!stateFilter) return;
-  
-  // Extract unique non-null states
-  const states = [...new Set(colleges
-    .map(c => c.state_province || c["state-province"])
-    .filter(Boolean)
-  )].sort();
-
   stateFilter.innerHTML = '<option value="">All States/Provinces</option>';
   states.forEach(state => {
     stateFilter.innerHTML += `<option value="${state}">${state}</option>`;

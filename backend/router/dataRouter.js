@@ -59,18 +59,22 @@ function findClosestCountry(input, countries) {
 router.get("/colleges", authMiddleware, async (req, res) => {
     try {
       const countryName = req.query.country;
-      if (!countryName) {
-        return res.status(400).json({ message: "Country is required" });
+      const page = Math.max(1, parseInt(req.query.page) || 1);
+      const limit = Math.max(1, parseInt(req.query.limit) || 20);
+      const skip = (page - 1) * limit;
+
+      const query = {};
+      if (countryName) {
+        query.country = { 
+          $regex: new RegExp(`^${escapeRegex(countryName)}$`, "i") 
+        };
       }
   
-      // 1. Query MongoDB first
-      let colleges = await Institute.find({
-        country: { 
-          $regex: new RegExp(`^${escapeRegex(countryName)}$`, "i") 
-        }
-      });
+      // Count total matching records efficiently
+      const totalRecords = await Institute.countDocuments(query);
       
-      if (!colleges.length) {
+      // If a country was searched but no records exist, run the Levenshtein suggestion system
+      if (totalRecords === 0 && countryName) {
         const distinctCountries = await Institute.distinct("country");
         const suggestion = findClosestCountry(countryName, distinctCountries);
         if (suggestion) {
@@ -80,8 +84,33 @@ router.get("/colleges", authMiddleware, async (req, res) => {
         }
         return res.status(404).json({ message: `No colleges found in "${countryName}".` });
       }
+
+      // Fetch distinct states for dropdown population
+      let distinctStates = [];
+      if (countryName) {
+        distinctStates = await Institute.distinct("state_province", query);
+        distinctStates = distinctStates.filter(Boolean).sort();
+      }
   
-      res.json(colleges);
+      // Fetch the paginated dataset
+      const colleges = await Institute.find(query)
+        .skip(skip)
+        .limit(limit);
+      
+      const totalPages = Math.ceil(totalRecords / limit);
+      const hasNextPage = page < totalPages;
+      const hasPrevPage = page > 1;
+  
+      res.json({
+        page,
+        limit,
+        totalRecords,
+        totalPages,
+        hasNextPage,
+        hasPrevPage,
+        states: distinctStates,
+        data: colleges
+      });
     } catch (err) {
       console.error("Database query error:", err);
       res.status(500).json({ message: "Server error" });

@@ -1,7 +1,6 @@
 import express from "express";
 import Institute from "../models/dataModels.js";
 import authMiddleware from "../auth/auth.js";
-import axios from "axios";
 
 const router = express.Router();
 
@@ -71,65 +70,15 @@ router.get("/colleges", authMiddleware, async (req, res) => {
         }
       });
       
-      // 2. If not found, fetch from external API and write-through cache it to MongoDB
       if (!colleges.length) {
-        console.log(`Cache miss for "${countryName}". Querying external API...`);
-        try {
-          const apiRes = await axios.get("https://universities.hipolabs.com/search?country=" + encodeURIComponent(countryName));
-          
-          if (apiRes.data && apiRes.data.length > 0) {
-            const collegesToInsert = apiRes.data.map(uni => ({
-              name: uni.name,
-              domains: uni.domains || [],
-              web_pages: uni.web_pages || [],
-              country: uni.country,
-              alpha_two_code: uni.alpha_two_code || "",
-              state_province: uni["state-province"] || null
-            }));
-            
-            // Bulk insert into MongoDB
-            await Institute.insertMany(collegesToInsert);
-            console.log(`Successfully cached ${collegesToInsert.length} colleges for "${countryName}" in MongoDB.`);
-            
-            // Re-fetch from DB to return consistent data structures
-            colleges = await Institute.find({
-              country: { 
-                $regex: new RegExp(`^${escapeRegex(countryName)}$`, "i") 
-              }
-            });
-          } else {
-            const distinctCountries = await Institute.distinct("country");
-            const suggestion = findClosestCountry(countryName, distinctCountries);
-            if (suggestion) {
-              return res.status(404).json({ 
-                message: `No colleges found in "${countryName}". Did you mean "${suggestion}"?` 
-              });
-            }
-            return res.status(404).json({ message: `No colleges found in "${countryName}".` });
-          }
-        } catch (apiErr) {
-          console.error("External API request failed:", apiErr.message);
-          const distinctCountries = await Institute.distinct("country");
-          const suggestion = findClosestCountry(countryName, distinctCountries);
-          
-          if (!apiErr.response) {
-            if (suggestion) {
-              return res.status(404).json({ 
-                message: `No local records found, and the external search directory is offline. Did you mean "${suggestion}"?` 
-              });
-            }
-            return res.status(404).json({ 
-              message: "No local records found, and the external search directory is offline. Please check your internet connection or search spelling." 
-            });
-          }
-          
-          if (suggestion) {
-            return res.status(404).json({ 
-              message: `No colleges found in "${countryName}". Did you mean "${suggestion}"?` 
-            });
-          }
-          return res.status(500).json({ message: "Error fetching data from external directory" });
+        const distinctCountries = await Institute.distinct("country");
+        const suggestion = findClosestCountry(countryName, distinctCountries);
+        if (suggestion) {
+          return res.status(404).json({ 
+            message: `No colleges found in "${countryName}". Did you mean "${suggestion}"?` 
+          });
         }
+        return res.status(404).json({ message: `No colleges found in "${countryName}".` });
       }
   
       res.json(colleges);
